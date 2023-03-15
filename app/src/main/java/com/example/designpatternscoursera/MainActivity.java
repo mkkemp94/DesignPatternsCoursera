@@ -4,6 +4,8 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.designpatternscoursera.factory.KnifeFactory;
+import com.example.designpatternscoursera.factory.KnifeFactoryStore;
 import com.example.designpatternscoursera.factory.model.Knife;
 import com.example.designpatternscoursera.factory.SimpleKnifeStore;
 import com.example.designpatternscoursera.singleton.ExampleSingleton;
@@ -35,6 +37,11 @@ public class MainActivity extends AppCompatActivity {
         SimpleKnifeStore knifeStore = new SimpleKnifeStore();
         Knife breadKnife = knifeStore.orderKnife("bread");
         breadKnife.polish();
+
+        KnifeFactory knifeFactory = new KnifeFactory();
+        KnifeFactoryStore knifeFactoryStore = new KnifeFactoryStore(knifeFactory);
+        Knife paringKnife = knifeFactoryStore.orderKnife("paring");
+        paringKnife.sharpen();
     }
 
 
