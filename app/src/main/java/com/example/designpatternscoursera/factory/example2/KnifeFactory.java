@@ -1,4 +1,4 @@
-package com.example.designpatternscoursera.factory;
+package com.example.designpatternscoursera.factory.example2;
 
 import com.example.designpatternscoursera.factory.model.BreadKnife;
 import com.example.designpatternscoursera.factory.model.ChefsKnife;
@@ -6,6 +6,7 @@ import com.example.designpatternscoursera.factory.model.Knife;
 import com.example.designpatternscoursera.factory.model.ParingKnife;
 import com.example.designpatternscoursera.factory.model.SteakKnife;
 
+// Creational Design Pattern
 public class KnifeFactory {
 
     public Knife createKnife(String knifeType) {

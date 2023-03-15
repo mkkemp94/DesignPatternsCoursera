@@ -4,10 +4,11 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.designpatternscoursera.factory.KnifeFactory;
-import com.example.designpatternscoursera.factory.KnifeFactoryStore;
+import com.example.designpatternscoursera.factory.example2.KnifeFactory;
+import com.example.designpatternscoursera.factory.example2.KnifeFactoryStore;
+import com.example.designpatternscoursera.factory.example3.BudgetKnifeStore;
 import com.example.designpatternscoursera.factory.model.Knife;
-import com.example.designpatternscoursera.factory.SimpleKnifeStore;
+import com.example.designpatternscoursera.factory.example1.SimpleKnifeStore;
 import com.example.designpatternscoursera.singleton.ExampleSingleton;
 
 public class MainActivity extends AppCompatActivity {
@@ -18,7 +19,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         createExampleSingleton();
-        createSimpleFactory();
+
+        createExampleFactories();
     }
 
 
@@ -32,16 +34,20 @@ public class MainActivity extends AppCompatActivity {
 
     //region factory
 
-    private void createSimpleFactory() {
+    private void createExampleFactories() {
 
-        SimpleKnifeStore knifeStore = new SimpleKnifeStore();
-        Knife breadKnife = knifeStore.orderKnife("bread");
+        SimpleKnifeStore simpleStore = new SimpleKnifeStore();
+        Knife breadKnife = simpleStore.orderKnife("bread");
         breadKnife.polish();
 
-        KnifeFactory knifeFactory = new KnifeFactory();
-        KnifeFactoryStore knifeFactoryStore = new KnifeFactoryStore(knifeFactory);
-        Knife paringKnife = knifeFactoryStore.orderKnife("paring");
+        KnifeFactory knifeFactory = new KnifeFactory(); // factory can be reused in multiple places
+        KnifeFactoryStore factoryStore = new KnifeFactoryStore(knifeFactory);
+        Knife paringKnife = factoryStore.orderKnife("paring");
         paringKnife.sharpen();
+
+        BudgetKnifeStore subclassStore = new BudgetKnifeStore();
+        Knife budgetSteakKnife = subclassStore.orderKnife("steak");
+        budgetSteakKnife.pack_age();
     }
 
 

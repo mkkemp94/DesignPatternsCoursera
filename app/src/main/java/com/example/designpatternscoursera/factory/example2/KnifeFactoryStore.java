@@ -1,18 +1,19 @@
-package com.example.designpatternscoursera.factory;
+package com.example.designpatternscoursera.factory.example2;
 
 import com.example.designpatternscoursera.factory.model.Knife;
 
 public class KnifeFactoryStore {
 
-    private KnifeFactory factory;
+    // Coding to an interface, not an implementation
+    private final KnifeFactory factory;
 
-    public KnifeFactoryStore(KnifeFactory factory) {
+    public KnifeFactoryStore(KnifeFactory factory) { // pass in a factory here
         this.factory = factory;
     }
 
     public Knife orderKnife(String knifeType) {
 
-        // Create knife
+        // Create knife using method in factory
         Knife knife = factory.createKnife(knifeType);
 
         // Prepare the knife

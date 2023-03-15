@@ -1,4 +1,4 @@
-package com.example.designpatternscoursera.factory;
+package com.example.designpatternscoursera.factory.example1;
 
 import com.example.designpatternscoursera.factory.model.BreadKnife;
 import com.example.designpatternscoursera.factory.model.ChefsKnife;
@@ -12,6 +12,7 @@ public class SimpleKnifeStore {
 
         Knife knife = null;
 
+        // Creational Design Pattern
         // create Knife object - concrete instantiation
         if (knifeType.equals("steak")) {
             knife = new SteakKnife();
