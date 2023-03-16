@@ -4,12 +4,15 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.designpatternscoursera.facade.BankService;
 import com.example.designpatternscoursera.factory.example2.KnifeFactory;
 import com.example.designpatternscoursera.factory.example2.KnifeFactoryStore;
 import com.example.designpatternscoursera.factory.example3.BudgetKnifeStore;
 import com.example.designpatternscoursera.factory.model.Knife;
 import com.example.designpatternscoursera.factory.example1.SimpleKnifeStore;
 import com.example.designpatternscoursera.singleton.ExampleSingleton;
+
+import java.math.BigDecimal;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
         createExampleSingleton();
 
         createExampleFactories();
+
+        createExampleFacade();
     }
 
 
@@ -50,6 +55,20 @@ public class MainActivity extends AppCompatActivity {
         budgetSteakKnife.pack_age();
     }
 
+    //endregion
+
+    //region facade
+
+    public void createExampleFacade() {
+
+        BankService bankService = new BankService();
+
+        int mySaving = bankService.createNewAccount("saving", new BigDecimal("500.00"));
+        int myInvestment = bankService.createNewAccount("investment", new BigDecimal("1000.00"));
+
+        bankService.transferMoney(mySaving, myInvestment, new BigDecimal("300.00"));
+
+    }
 
     //endregion
 }
