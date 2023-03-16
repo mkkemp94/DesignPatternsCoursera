@@ -4,12 +4,15 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.designpatternscoursera.adapter.WebClient;
+import com.example.designpatternscoursera.adapter.ouradapter.WebAdapter;
+import com.example.designpatternscoursera.adapter.thirdparty.WebService;
 import com.example.designpatternscoursera.facade.BankService;
+import com.example.designpatternscoursera.factory.example1.SimpleKnifeStore;
 import com.example.designpatternscoursera.factory.example2.KnifeFactory;
 import com.example.designpatternscoursera.factory.example2.KnifeFactoryStore;
 import com.example.designpatternscoursera.factory.example3.BudgetKnifeStore;
 import com.example.designpatternscoursera.factory.model.Knife;
-import com.example.designpatternscoursera.factory.example1.SimpleKnifeStore;
 import com.example.designpatternscoursera.singleton.ExampleSingleton;
 
 import java.math.BigDecimal;
@@ -26,8 +29,9 @@ public class MainActivity extends AppCompatActivity {
         createExampleFactories();
 
         createExampleFacade();
-    }
 
+        createExampleAdapter();
+    }
 
     //region singleton
 
@@ -68,6 +72,21 @@ public class MainActivity extends AppCompatActivity {
 
         bankService.transferMoney(mySaving, myInvestment, new BigDecimal("300.00"));
 
+    }
+
+    //endregion
+
+    //region adapter
+
+    public void createExampleAdapter() {
+        String webHost = "Host: https://google.com\n\r";
+        WebService service = new WebService(webHost);
+
+        WebAdapter adapter = new WebAdapter();
+        adapter.connect(service);
+
+        WebClient client = new WebClient(adapter);
+        client.doWork();
     }
 
     //endregion
