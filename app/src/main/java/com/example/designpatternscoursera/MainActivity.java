@@ -15,6 +15,8 @@ import com.example.designpatternscoursera.factory.example2.KnifeFactory;
 import com.example.designpatternscoursera.factory.example2.KnifeFactoryStore;
 import com.example.designpatternscoursera.factory.example3.BudgetKnifeStore;
 import com.example.designpatternscoursera.factory.model.Knife;
+import com.example.designpatternscoursera.proxy.example2.Internet;
+import com.example.designpatternscoursera.proxy.example2.ProxyInternet;
 import com.example.designpatternscoursera.singleton.ExampleSingleton;
 
 import java.math.BigDecimal;
@@ -35,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
         createExampleAdapter();
 
         createExampleComposite();
+
+        createExampleProxy();
     }
 
     //region singleton
@@ -121,6 +125,23 @@ public class MainActivity extends AppCompatActivity {
         currentFloor.enter();
 
         building.exit();
+    }
+
+    //endregion
+
+    //region proxy
+
+    private void createExampleProxy() {
+        Internet internet = new ProxyInternet();
+        try
+        {
+            internet.connectTo("geeksforgeeks.org");
+            internet.connectTo("abc.com");
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
     }
 
     //endregion
