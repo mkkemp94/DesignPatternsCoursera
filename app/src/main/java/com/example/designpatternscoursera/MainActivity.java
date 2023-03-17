@@ -9,6 +9,10 @@ import com.example.designpatternscoursera.adapter.ouradapter.WebAdapter;
 import com.example.designpatternscoursera.adapter.thirdparty.WebService;
 import com.example.designpatternscoursera.composite.Housing;
 import com.example.designpatternscoursera.composite.Room;
+import com.example.designpatternscoursera.decorator.AuthenticatedWebPage;
+import com.example.designpatternscoursera.decorator.AuthorizedWebPage;
+import com.example.designpatternscoursera.decorator.BasicWebPage;
+import com.example.designpatternscoursera.decorator.WebPage;
 import com.example.designpatternscoursera.facade.BankService;
 import com.example.designpatternscoursera.factory.example1.SimpleKnifeStore;
 import com.example.designpatternscoursera.factory.example2.KnifeFactory;
@@ -39,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
         createExampleComposite();
 
         createExampleProxy();
+
+        createExampleDecorator();
     }
 
     //region singleton
@@ -142,6 +148,19 @@ public class MainActivity extends AppCompatActivity {
         {
             System.out.println(e.getMessage());
         }
+    }
+
+    //endregion
+
+    //region decorator
+
+    private void createExampleDecorator() {
+
+        WebPage myPage = new BasicWebPage();
+        myPage = new AuthorizedWebPage(myPage);
+        myPage = new AuthenticatedWebPage(myPage);
+        myPage.display();
+
     }
 
     //endregion
