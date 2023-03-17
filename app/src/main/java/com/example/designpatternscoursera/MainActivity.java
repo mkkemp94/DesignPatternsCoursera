@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.designpatternscoursera.adapter.WebClient;
 import com.example.designpatternscoursera.adapter.ouradapter.WebAdapter;
 import com.example.designpatternscoursera.adapter.thirdparty.WebService;
+import com.example.designpatternscoursera.composite.Housing;
+import com.example.designpatternscoursera.composite.Room;
 import com.example.designpatternscoursera.facade.BankService;
 import com.example.designpatternscoursera.factory.example1.SimpleKnifeStore;
 import com.example.designpatternscoursera.factory.example2.KnifeFactory;
@@ -31,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
         createExampleFacade();
 
         createExampleAdapter();
+
+        createExampleComposite();
     }
 
     //region singleton
@@ -87,6 +91,36 @@ public class MainActivity extends AppCompatActivity {
 
         WebClient client = new WebClient(adapter);
         client.doWork();
+    }
+
+    //endregion
+
+    //region composite
+
+    private void createExampleComposite() {
+
+        Housing building = new Housing("123 Street");
+        Housing floor1 = new Housing("123 Street - First Floor");
+
+        int firstFloor = building.addStructure(floor1);
+
+        Room washroom1M = new Room("1F Men's Washroom");
+        Room washroom1F = new Room("1F Women's Washroom");
+        Room common1 = new Room("1F Common Area");
+
+        int firstMens = floor1.addStructure(washroom1M);
+        int firstWomans = floor1.addStructure(washroom1F);
+        int firstCommon = floor1.addStructure(common1);
+
+        building.enter();
+        Housing currentFloor = (Housing) building.getStructure(firstFloor);
+        currentFloor.enter();;
+        Room currentRoom = (Room) currentFloor.getStructure(firstMens);
+        currentRoom.enter();
+        currentRoom = (Room) currentFloor.getStructure(firstCommon);
+        currentFloor.enter();
+
+        building.exit();
     }
 
     //endregion
